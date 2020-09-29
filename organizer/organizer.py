@@ -33,7 +33,7 @@ def initialize_sorted_list():
             if len(raw_file_names) == 1:
                 break
 
-        album.append(raw_file_names[0])
+        album.append(raw_file_names[0]) # special case for last song of each album
         raw_file_names.pop(0)
         sorted_music_info.append(album)
         album = []
@@ -41,20 +41,17 @@ def initialize_sorted_list():
 
 
 def move_to_folder():
-    i = 0
-    while i < len(raw_file_names):
-        tag = TinyTag.get(raw_file_names[i][2])
+    for album in sorted_music_info:
+        tag = TinyTag.get(album[0][2])
         folder_name = f'{tag.artist} - {tag.album} ({tag.year.split("-",1)[0]})'
-        folder_name = re.sub('[!@#$/]', '', folder_name)
+        folder_name = re.sub('[!@#$%^&*/?]', '', folder_name)
 
-        if os.path.isdir(folder_name):
-            continue
-        else:
+        if os.path.isdir(folder_name) is False:
             os.mkdir(folder_name)
-            while tag.album == raw_file_names[i][1] and i < len(raw_file_names):
-                shutil.move(raw_file_names[i][2], folder_name)
-                i += 1
+            for song in album:
+                shutil.move(song[2], folder_name)
     return
+
 
 # testing purposes
 def extract_from_directories():
@@ -71,8 +68,7 @@ raw_file_names = get_music_in_directory('')
 sorted_music_info = []
 add_artist_album_info()
 sort_raw_data()
-d = sorted_music_info
+archive = sorted_music_info
 initialize_sorted_list()
-print(d)
-# move_to_folder()
+move_to_folder()
 # extract_from_directories()
