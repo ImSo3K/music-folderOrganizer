@@ -30,6 +30,7 @@ import re
 import shutil
 import glob
 import operator
+from pathlib import Path
 from tinytag import TinyTag
 
 
@@ -102,7 +103,9 @@ def move_to_directory() -> None:
 
 
 def extract_from_directories():
-    """does the exact opposite job from move_to_directory() (with directory removal)
+    """
+    does the exact opposite job from move_to_directory() (with directory removal)
+    mainly for testing purposes.
     """
     directories = glob.glob("*/")
     for directory in directories:
@@ -112,7 +115,7 @@ def extract_from_directories():
         os.rmdir(directory)
 
 
-os.chdir('/home/sharon/Music/')
+os.chdir(f'{Path.home()}/Music/')
 raw_file_names = get_music_in_directory('')
 sorted_music_info = []
 add_artist_album_info()
