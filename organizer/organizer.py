@@ -24,19 +24,20 @@ def sort_raw_data():
 
 def initialize_sorted_list():
     album = []
-    while raw_file_names:
-        album_name = raw_file_names[0][1]
+    for file in raw_file_names:
+        album_name = file[1]
 
-        while album_name == raw_file_names[1][1]:
-            album.append(raw_file_names[0])
-            raw_file_names.pop(0)
-            if len(raw_file_names) == 1:
-                break
+        if raw_file_names.index(file) + 1 == len(raw_file_names):
+            album.append(file)
+            sorted_music_info.append(album)
 
-        album.append(raw_file_names[0]) # special case for last song of each album
-        raw_file_names.pop(0)
-        sorted_music_info.append(album)
-        album = []
+        elif album_name == raw_file_names[raw_file_names.index(file) + 1][1]:
+            album.append(file)
+
+        else:
+            album.append(file)
+            sorted_music_info.append(album)
+            album = []
     return
 
 
@@ -70,5 +71,7 @@ add_artist_album_info()
 sort_raw_data()
 archive = sorted_music_info
 initialize_sorted_list()
-move_to_folder()
-# extract_from_directories()
+# print(sorted_music_info[1])
+# move_to_folder()
+extract_from_directories()
+
