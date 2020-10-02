@@ -15,7 +15,7 @@ Developed on Python 3.8.0 but I'm pretty sure it will work on any version >= 3.5
 Well this script uses only 1 package, so you either can `pip install tinytag` or `pip install -r requirements.txt`
 
 ## Known Bugs
-There seems to be a little bug with directory names that have backslashes `\`, it's just about that regex expression which I'll fix.
+~~There seems to be a little bug with directory names that have backslashes `\`, it's just about that regex expression which I'll fix.~~ - Fixed :ok_hand:
 
 ## Acknowledgments
  - [devsnd](https://github.com/devsnd), creator of tinytag library.
