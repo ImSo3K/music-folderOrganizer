@@ -94,7 +94,7 @@ def move_to_directory() -> None:
     for album in sorted_music_info:
         tag = TinyTag.get(album[0][2])
         folder_name = f'{tag.artist} - {tag.album} ({tag.year.split("-",1)[0]})'
-        folder_name = re.sub('[!@#$%^&*/?"<:>|\\\\]', '', folder_name)
+        folder_name = re.sub(r'[!@#$%^&*/?"<:>|\\\\]', '', folder_name)
 
         if os.path.isdir(folder_name) is False:
             os.mkdir(folder_name)
